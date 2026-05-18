@@ -14,29 +14,30 @@ mlflow.set_tracking_uri("http://localhost:5555")
 
 # Define the directory where your Python script is located (ModelCleaning)
 #model_cleaning_dir = os.path.join(workspace, 'ModelCleaning')
-model_cleaning_dir = ('/opt/mlflow/Week7MLModel/ModelCleaning')
+#model_cleaning_dir = ('/opt/mlflow/Week7MLModel/ModelCleaning')
 
 # Define the full path to the cleaned data CSV file
-csv_file_path = os.path.join(model_cleaning_dir, 'cleaned_data.csv')
+#csv_file_path = os.path.join(model_cleaning_dir, 'cleaned_data.csv')
+
 
 # Check if the file exists (for debugging)
-if os.path.exists(csv_file_path):
+#if os.path.exists(csv_file_path):
     print(f"File found: {csv_file_path}")
-else:
-    print(f"File not found at: {csv_file_path}")
+#else:
+    #print(f"File not found at: {csv_file_path}")
 
 # Read the cleaned data CSV file
-df = read_csv(csv_file_path)
+df = read_csv("asteroids_data_clean.csv")
 
 # Proceed with your training logic
 print(df.head()) 
 
 
 
-X= df[["Age"]]
-y= df["Salary"]
-print(df["Age"].isna().sum())
-print(df["Salary"].isna().sum())
+X = df[["magnitude"]]
+y = df["aphelion_distance"]
+print(df["magnitude"].isna().sum())
+print(df["aphelion_distance"].isna().sum())
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
