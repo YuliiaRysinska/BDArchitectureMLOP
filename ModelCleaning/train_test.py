@@ -1,10 +1,11 @@
 import os
-
+import mlflow
 from pandas import read_csv
 from joblib import dump
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+
 
 # Get GitHub workspace path
 workspace = os.getenv('GITHUB_WORKSPACE')
@@ -38,13 +39,32 @@ X_train, X_test, y_train, y_test = train_test_split(
     test_size=0.2,
     random_state=42
 )
+# Start MLflow Run
+with mlflow.start_run():
+    # Train model
+    mind = LinearRegression()
+    mind.fit(X_train, y_train)
 
-# Train model
-mind = LinearRegression()
+    # Evaluate
+    predictions = model.predict(X_test)
+    r2 = r2_score(y_test, predictions)
+    mse = mean_squared_error(y_test, predictions)
 
-mind.fit(X_train, y_train)
+    # Log Metrics
+    mlflow.log_metric("r2_score", r2)
+    mlflow.log_metric("mse", mse)
 
-# Save trained model
-dump(mind, "AgeSalaryModel.pkl")
+    # Log Model & Resiter
+    result = mlflow.sklearn.log_model(sk_model=mind, artifact_path="model")
+
+    mlflow.register_model(
+        model_url=result.model_url,
+        name="my_linear_model"
+        )
+    print(f"Model logged by R2: {r2}")
+
+with open("Food Model.pkl", "wb") as file:
+    pickle.dump(mind, file)
+
 
 print("Model trained and saved successfully!")
