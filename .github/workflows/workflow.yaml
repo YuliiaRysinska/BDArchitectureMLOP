@@ -13,3 +13,19 @@ jobs:
         run: |
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
+
+  data_pipeline:
+    name: data_pipeline
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+    - name: Cleandata
+      run: |
+        pwd
+        ls -al
+        pwd
+        cd ModelCleaning
+        pip install pandas
+        python Cleandata.py
+        
