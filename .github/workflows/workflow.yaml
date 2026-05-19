@@ -5,45 +5,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  data_pipeline:
+  job1:
     runs-on: ubuntu-latest
 
     steps:
-
-      # Step 1 - Checkout repository
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Step 2 - Show workspace path
-      - name: Show workspace
-        run: |
+      - uses: actions/checkout@v6
+      - run: |
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
 
-      # Step 3 - Set up Python 3.12
+      
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+        uses: actions/setup-python@v6
+        with: 
+            python-version: '3.12'
 
-      # Step 4 - Check Python version
-      - name: Python version
-        run: python --version
+      - name: Confirm python version
+        run:
+              python --version
+            
 
-      # Step 5 - Install dependencies
-      - name: Install dependencies
-        run: |
-          pip install pandas scikit-learn joblib
-
-      # Step 6 - Clean data
-      - name: Clean Data
+      
+      - name: Cleandata
         run: |
           pwd
           ls -al
+          pwd
           cd ModelCleaning
+          pip install pandas
           python Cleandata.py
-
-      # Step 7 - Train and test model
-      - name: Train and Test Model
+          
+      - name: train_test
         run: |
+          pipinstall scikit-learn jonlib
           python ModelCleaning/train_test.py
+
+
