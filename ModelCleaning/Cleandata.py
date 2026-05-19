@@ -43,14 +43,9 @@ df.drop_duplicates(inplace=True)
 
  
 
-workspace = os.getenv('GITHUB_WORKSPACE') 
+workspace = os.getcwd()
 
- 
-
-# Define the directory where your Python script is located (ModelCleaning) 
-
-model_cleaning_dir = os.path.join(workspace, 'ModelCleaning') 
-
+model_cleaning_dir = workspace
  
 
 # Define the full path for the output file 
