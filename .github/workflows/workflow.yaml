@@ -2,11 +2,14 @@ name: CI
 on:
   workflow_dispatch
 
-lobs:
-  job1:
+jobs:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: action/checkout@6
-    - run: |
-      echo ${{ github.workspace }}
-      echo $ GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
+
+      - name: Show workspace
+        run: |
+          echo ${{ github.workspace }}
+          echo $GITHUB_WORKSPACE
