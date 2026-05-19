@@ -37,7 +37,7 @@ jobs:
           
       - name: train_test
         run: |
-          pipinstall scikit-learn jonlib
+          pip install scikit-learn jonlib
           python ModelCleaning/train_test.py
 
 
