@@ -6,6 +6,7 @@ on:
 
 jobs:
   job1:
+    name: job1
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
@@ -21,14 +22,14 @@ jobs:
       run: 
         python --version
     
-    - name: clean-data
-      run: |
-        cd ModelCleaning
+    - name: cleandata
+      run: 
         ls -al
         pip install pandas
-        python Cleandata.py
+        python cleandata.ipynb
+
     - name: train_model
       run: |
         pip install scikit-learn joblib
-        python ModelCleaning/train_test.py
+        python train_test.py
        
