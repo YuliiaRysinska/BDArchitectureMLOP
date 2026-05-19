@@ -28,8 +28,8 @@ df = read_csv(csv_file_path)
 print(df.head())
 
 # Features and target
-X = df["Age"].values.reshape(-1, 1)
-y = df["Salary"]
+X = df[["calories", "rating"]]
+y = df["price"]
 
 # Split dataset
 X_train, X_test, y_train, y_test = train_test_split(
