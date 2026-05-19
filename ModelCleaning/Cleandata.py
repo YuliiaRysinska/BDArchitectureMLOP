@@ -3,7 +3,7 @@ import pandas as pd
 
 # Load CSV file 
 
-df = pd.read_csv('asteroids_data.csv') 
+df = pd.read_csv('Data.csv') 
 
 # Show original data 
 
