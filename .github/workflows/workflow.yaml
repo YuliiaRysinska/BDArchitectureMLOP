@@ -1,45 +1,49 @@
+
 name: CI
+
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
-  data_pipeline::
+  data_pipeline:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
 
+      # Step 1 - Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2 - Show workspace path
       - name: Show workspace
         run: |
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
-      
+
+      # Step 3 - Set up Python 3.12
       - name: Set up Python 3.12
-        uses: actions/setup-python@v6
-        with: 
-              python-version: '3.12'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: python version
-        run:
-              python -v
+      # Step 4 - Check Python version
+      - name: Python version
+        run: python --version
 
-  
-      - name: data_pipeline
-        runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Cleandata
+      # Step 5 - Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install pandas scikit-learn joblib
+
+      # Step 6 - Clean data
+      - name: Clean Data
         run: |
           pwd
           ls -al
-          pwd
           cd ModelCleaning
-          pip install pandas
           python Cleandata.py
-      - name: train_test
+
+      # Step 7 - Train and test model
+      - name: Train and Test Model
         run: |
-          pipinstall scikit-learn jonlib
           python ModelCleaning/train_test.py
-
-
