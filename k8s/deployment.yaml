@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: edwinasweeney/flaskapp:v1
+          image: iuy.nickolaencko/flaskapp:v1
           imagePullPolicy: Never
 
           ports:
