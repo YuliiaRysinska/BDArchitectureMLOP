@@ -32,8 +32,8 @@ jobs:
 
       - name: Build image
         run: |
-          docker build . -t iuy.nickolaencko/modelbuild:latest
+          docker build -f ModelCleaning/Dockerfile -t iuy.nickolaencko/modelbuild:latest .
 
       - name: Push image to Docker Hub
         run: |
-          docker push iuy.nickolaencko/modelbuild:latest
+          docker build -f ModelCleaning/Dockerfile -t iuy.nickolaencko/modelbuild:latest .
