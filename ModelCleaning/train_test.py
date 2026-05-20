@@ -6,7 +6,7 @@ from joblib import dump
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-mlflow.set_tracking_url("http://localhost:5555")
+mlflow.set_tracking_uri("http://localhost:5555")
 
 # Get GitHub workspace path
 workspace = os.getenv('GITHUB_WORKSPACE')
