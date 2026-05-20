@@ -1,0 +1,23 @@
+
+name: mlModelRunner
+on:
+  workflow_dispatch
+
+jobs:
+    echo:
+        runs-on: self-hosted
+        steps:
+            - name: checkout Code
+              uses: actions/checkout@v6
+            - name: Printing Folders
+              run: |
+                sudo chmod 666 /var/run/docker.sock
+                ls
+
+            - name: build image
+              run: docker build . -t number1
+            - name: docker run
+              run: |
+                docker run number1
+                docker ps 
+                
