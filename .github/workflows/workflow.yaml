@@ -37,7 +37,7 @@ jobs:
           
       - name: train_test
         run: |
-          pip install scikit-learn joblib
+          pip install pandas scikit-learn joblib mlflow
           python ModelCleaning/train_test.py
           
 
