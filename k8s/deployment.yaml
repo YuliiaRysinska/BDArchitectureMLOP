@@ -1,18 +1,39 @@
-name: Deploy Kubernetes
+apiVersion: apps/v1 
 
-on:
-  workflow_dispatch:
+kind: Deployment 
 
-jobs:
+metadata: 
 
-  deploy:
+  name: flask-app 
 
-    runs-on: ubuntu-latest
+spec: 
 
-    steps:
+  replicas: 1 
 
-      - uses: actions/checkout@v4
+  selector: 
 
-      - name: Show deployment file
-        run: |
-          cat k8s/deployment.yaml
+    matchLabels: 
+
+      app: flask-app 
+
+  template: 
+
+    metadata: 
+
+      labels: 
+
+        app: flask-app 
+
+    spec: 
+
+      containers: 
+
+        - name: flask-app 
+
+          image: iuy.nickolaencko/flaskapp:v1 
+
+          imagePullPolicy: Never 
+
+          ports: 
+
+            - containerPort: 5000 
