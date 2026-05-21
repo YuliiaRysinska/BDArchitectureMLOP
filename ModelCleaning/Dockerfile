@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 5000
 
 # Run training before starting app (optional)
-RUN python src/train.py
+RUN python ModelCleaning/train.py
 
 # Start Flask application
-CMD ["python", "src/app.py"]
+CMD ["python", "ModelCleaning/app.py"]
