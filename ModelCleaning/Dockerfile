@@ -1,9 +1,23 @@
-FROM python:3.12-slim
+# Use official Python image
+FROM python:3.10-slim
 
+# Set working directory
 WORKDIR /app
 
+# Copy requirements first
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy entire project
 COPY . .
 
-RUN pip install pandas scikit-learn joblib mlflow
+# Expose Flask port
+EXPOSE 5000
 
-CMD ["python", "ModelCleaning/train_test.py"]
+# Run training before starting app (optional)
+RUN python src/train.py
+
+# Start Flask application
+CMD ["python", "src/app.py"]
